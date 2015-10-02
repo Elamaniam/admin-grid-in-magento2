@@ -66,7 +66,22 @@ class Edit extends \Magento\Backend\App\Action
     public function execute()
     {
         $data = $this->_objectManager->get('Magento\Backend\Model\Session')->getFormData(true);
-        if (!empty($data)) {
+
+        $model = $this->_objectManager->create('Ktpl\Customform\Model\Form');
+        // 2. Initial checking
+        if ($id) {
+            $model->load($id);
+            if (!$model->getId()) {
+                $this->messageManager->addError(__('This entry no longer exists.'));
+                /** \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
+                $resultRedirect = $this->resultRedirectFactory->create();
+
+                return $resultRedirect->setPath('*/*/');
+            }
+        }
+        
+        if (!empty($data)) 
+        {
             $model->setData($data);
         }
         // 4. Register model to use later in blocks
