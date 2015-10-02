@@ -1,0 +1,6 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Backend/etc/menu.xsd">
+    <menu>
+        <add id="Ktpl_Customform::customform" title="KTPL" module="Ktpl_Customform" sortOrder="30" resource="Ktpl_Customform::customform"/>
+        <add id="Ktpl_Customform::manage_items" title="Custom Form" module="Ktpl_Customform" sortOrder="10" parent="Ktpl_Customform::customform" action="customform/index/" resource="Ktpl_Customform::customform"/>
+    </menu>
+</config>
