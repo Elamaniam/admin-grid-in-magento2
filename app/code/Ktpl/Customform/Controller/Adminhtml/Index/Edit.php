@@ -67,6 +67,7 @@ class Edit extends \Magento\Backend\App\Action
     {
         $data = $this->_objectManager->get('Magento\Backend\Model\Session')->getFormData(true);
 
+        $id = $this->getRequest()->getParam('ktpl_emp_id');
         $model = $this->_objectManager->create('Ktpl\Customform\Model\Form');
         // 2. Initial checking
         if ($id) {
@@ -79,7 +80,7 @@ class Edit extends \Magento\Backend\App\Action
                 return $resultRedirect->setPath('*/*/');
             }
         }
-        
+
         if (!empty($data)) 
         {
             $model->setData($data);
