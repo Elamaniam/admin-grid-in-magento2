@@ -65,31 +65,12 @@ class Edit extends \Magento\Backend\App\Action
      */
     public function execute()
     {
-        // 1. Get ID and create model
-        
-        $id = $this->getRequest()->getParam('ktpl_emp_id');
-        $model = $this->_objectManager->create('Ktpl\Customform\Model\Form');
-        // 2. Initial checking
-        if ($id) {
-            $model->load($id);
-            if (!$model->getId()) {
-                $this->messageManager->addError(__('This entry no longer exists.'));
-                /** \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
-                $resultRedirect = $this->resultRedirectFactory->create();
-
-                return $resultRedirect->setPath('*/*/');
-            }
-        }
-
-        // 3. Set entered data if was error when we do save
         $data = $this->_objectManager->get('Magento\Backend\Model\Session')->getFormData(true);
         if (!empty($data)) {
             $model->setData($data);
         }
-
         // 4. Register model to use later in blocks
         $this->_coreRegistry->register('form_post', $model);
-
         // 5. Build edit form
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         $resultPage = $this->_initAction();
